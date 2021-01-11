@@ -1,24 +1,19 @@
-import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { TokenEndpointFactory } from '../types/auth.types';
-
-declare module 'axios' {
-  interface AxiosResponse<T = any> extends Promise<T> {}
-}
-
+import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { TokenEndpointFactory } from "../types/auth.types";
 
 export abstract class HttpClient {
   protected readonly instance: AxiosInstance;
   protected readonly config = {
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  }
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  };
 
-   public constructor(tokenEndpoint: TokenEndpointFactory) {
-      const baseURL = tokenEndpoint();
-      this.instance = axios.create({
-        baseURL,
-      });
+  public constructor(tokenEndpoint: TokenEndpointFactory) {
+    const baseURL = tokenEndpoint();
+    this.instance = axios.create({
+      baseURL,
+    });
 
     this._initializeResponseInterceptor();
   }
@@ -26,13 +21,12 @@ export abstract class HttpClient {
   private _initializeResponseInterceptor = () => {
     this.instance.interceptors.response.use(
       this._handleResponse,
-      this._handleError,
+      this._handleError
     );
   };
 
-  protected async authenticate(params: URLSearchParams): Promise<any>
-  {
-    return await this.instance.post('', params, this.config);
+  protected async authenticate(params: URLSearchParams): Promise<any> {
+    return await this.instance.post("", params, this.config);
   }
 
   private _handleResponse = ({ data }: AxiosResponse) => data;

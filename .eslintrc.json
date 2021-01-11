@@ -22,7 +22,7 @@
   },
   "rules": {
     "quotes": [
-      "error",
+      "warn",
       "single"
     ],
     "@typescript-eslint/explicit-function-return-type": "off",
