@@ -11,7 +11,7 @@ import {
   AadAuthenticationClient,
   Token,
   TokenError,
-} from 'tokenator';
+} from '@cmdbg/tokenator';
 
 export class AadRopcStrategy {
 
