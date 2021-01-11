@@ -14,6 +14,7 @@
     "format": "prettier --write \"src/**/*.ts\" ",
     "lint": "tsc --noEmit && eslint src/**/*.ts{,x}",
     "lint:fix": "tsc --noEmit && eslint src/**/*.ts{,x} --fix",
+    "lint:prod": "tsc --noEmit && cross-env NODE_ENV=production eslint src/**/*.ts{,x}",
     "prepublishOnly": "npm run build"
   },
   "repository": {
