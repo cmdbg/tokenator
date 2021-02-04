@@ -1,6 +1,6 @@
 {
   "name": "@cmdbg/tokenator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "NodeJS library for OAuth authentication against 3rd party identity providers",
   "author": "CMD Bulgaria Ltd",
   "private": false,

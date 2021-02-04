@@ -1,4 +1,10 @@
-import { Token, AuthConfig, TokenError, AuthConfigFactory } from "../../types";
+import {
+  Token,
+  AuthConfig,
+  TokenError,
+  AuthConfigFactory,
+  UserCredentials,
+} from "../../types";
 import { AuthFlow, HttpClient } from "../../util";
 
 /**
@@ -48,13 +54,21 @@ export class AadAuthenticationClient extends HttpClient {
    * @api public
    * @returns Returns {@linkcode TokenError} if the grant is successful or {@linkcode TokenError}  if the grant fails.
    */
-  async authenticateROPC(): Promise<Token | TokenError> {
+  async authenticateROPC(
+    userCredentials?: UserCredentials
+  ): Promise<Token | TokenError> {
     let token;
     const params = new URLSearchParams();
     params.append("client_id", this.authConfig.clientID);
     params.append("scope", this.authConfig.scope);
-    params.append("username", this.authConfig.username);
-    params.append("password", this.authConfig.password);
+    params.append(
+      "username",
+      userCredentials ? userCredentials.username : this.authConfig.username
+    );
+    params.append(
+      "password",
+      userCredentials ? userCredentials.password : this.authConfig.password
+    );
     params.append("grant_type", AuthFlow.ROPC);
 
     try {
